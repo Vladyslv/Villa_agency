@@ -8,9 +8,6 @@ DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS properties;
 DROP TABLE IF EXISTS users;
 
-INSERT INTO users (name, email, password, role) VALUES
-('Admin', 'admin@villa.local', '$2y$10$yeFVVvp/Fo.DllP1WZ5oYeYI44/OIYSeop8mJfUc0uxSX1warZhQS', 'admin');
-
 CREATE TABLE properties (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
