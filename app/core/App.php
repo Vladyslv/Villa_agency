@@ -13,5 +13,6 @@ class App
         require_once __DIR__ . '/Redirect.php';
 
         require_once __DIR__ . '/../models/Property.php';
+        require_once __DIR__ . '/../models/Contact.php';
     }
 }

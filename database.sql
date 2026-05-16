@@ -43,3 +43,13 @@ INSERT INTO properties (title, category, price, bedrooms, bathrooms, area, floor
 
 ('22 New Street Portland, OR 16540', 'Modern Condo', 450000, 3, 2, 165, '26th', '3 cars',
  'Súčasný condo s minimalistickým dizajnom. Skvelá poloha v meste, blízko obchody a reštaurácie.', 'property-06.jpg');
+
+CREATE TABLE contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    subject VARCHAR(200) DEFAULT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_created (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
