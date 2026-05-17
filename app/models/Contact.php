@@ -10,6 +10,12 @@ class Contact
         $this->db = $database->getConnection();
     }
 
+    public function all(): array
+    {
+        $sql = "SELECT * FROM contacts ORDER BY created_at DESC";
+        return $this->db->query($sql)->fetchAll();
+    }
+
     public function store(array $data): bool
     {
         $name = trim($data['name'] ?? '');

@@ -1,0 +1,72 @@
+body {
+    background: #f6f6f6;
+}
+
+.admin-wrap {
+    padding: 40px 0;
+}
+
+.admin-nav {
+    background: #1e1e1e;
+    padding: 14px 0;
+    margin-bottom: 0;
+}
+
+.admin-nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 14px;
+    margin-right: 10px;
+}
+
+.admin-nav a:hover {
+    color: #f35525;
+}
+
+.admin-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.admin-card h2 {
+    font-size: 22px;
+    margin-bottom: 18px;
+    color: #1e1e1e;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 20px;
+}
+
+.stat-card h3 {
+    font-size: 32px;
+    color: #f35525;
+    margin: 0;
+}
+
+.stat-card p {
+    margin: 6px 0 0;
+    color: #777;
+}
+
+table.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.admin-table th,
+table.admin-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    font-size: 14px;
+}
+
+table.admin-table th {
+    background: #fafafa;
+    font-weight: 600;
+}
