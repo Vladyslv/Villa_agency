@@ -44,7 +44,10 @@ require_once 'partials/header-admin.php';
 </div>
 
 <div class="admin-card">
-    <h2>Properties</h2>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+        <h2 style="margin:0;">Properties</h2>
+        <a href="property-create.php" class="btn-orange">+ New Property</a>
+    </div>
 
     <?php if (empty($properties)): ?>
         <p style="color:#777;">Zatiaľ žiadne nehnuteľnosti v databáze.</p>
