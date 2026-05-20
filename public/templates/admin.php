@@ -5,6 +5,14 @@ App::init();
 $propertyModel = new Property();
 $contactModel = new Contact();
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
+    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+    if ($id > 0) {
+        $propertyModel->delete($id);
+    }
+    Redirect::redirect('admin.php');
+}
+
 $properties = $propertyModel->all();
 $contacts = $contactModel->all();
 
@@ -62,6 +70,7 @@ require_once 'partials/header-admin.php';
                     <th>Beds / Baths</th>
                     <th>Area</th>
                     <th>Created</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -74,6 +83,16 @@ require_once 'partials/header-admin.php';
                         <td><?php echo (int)$p->bedrooms; ?> / <?php echo (int)$p->bathrooms; ?></td>
                         <td><?php echo (int)$p->area; ?>m²</td>
                         <td><?php echo date('d.m.Y', strtotime($p->created_at)); ?></td>
+                        <td>
+                            <div class="action-cell">
+                                <a href="property-edit.php?id=<?php echo $p->id; ?>" class="btn-ghost">Edit</a>
+                                <form method="POST" style="display:inline;" onsubmit="return confirm('Naozaj vymazať túto nehnuteľnosť?');">
+                                    <input type="hidden" name="action" value="delete">
+                                    <input type="hidden" name="id" value="<?php echo $p->id; ?>">
+                                    <button type="submit" class="btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

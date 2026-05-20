@@ -134,3 +134,26 @@ table.admin-table th {
 .btn-ghost:hover {
     background: #f0f0f0;
 }
+
+.btn-danger {
+    background: #fff;
+    color: #d6431a;
+    padding: 7px 15px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border: 1px solid #d6431a;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background: #d6431a;
+    color: #fff;
+}
+
+.action-cell {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}

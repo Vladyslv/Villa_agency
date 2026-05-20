@@ -1,7 +1,6 @@
 <?php
 
-class Property
-{
+class Property {
     private PDO $db;
 
     public function __construct()
@@ -32,38 +31,96 @@ class Property
         return $stmt->fetchAll();
     }
 
-public function create(
-    string $title,
-    string $category,
-    float $price,
-    int $bedrooms,
-    int $bathrooms,
-    int $area,
-    string $floor,
-    string $parking,
-    string $description,
-    string $image = 'property-01.jpg'
-): bool {
-    try {
-        $sql = "INSERT INTO properties (title, category, price, bedrooms, bathrooms, area, floor, parking, description, image)
-                VALUES (:title, :category, :price, :bedrooms, :bathrooms, :area, :floor, :parking, :description, :image)";
+    public function create(
+        string $title,
+        string $category,
+        float $price,
+        int $bedrooms,
+        int $bathrooms,
+        int $area,
+        string $floor,
+        string $parking,
+        string $description,
+        string $image = 'property-01.jpg'
+    ): bool {
+        try {
+            $sql = "INSERT INTO properties (title, category, price, bedrooms, bathrooms, area, floor, parking, description, image)
+                    VALUES (:title, :category, :price, :bedrooms, :bathrooms, :area, :floor, :parking, :description, :image)";
 
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute([
-            'title' => $title,
-            'category' => $category,
-            'price' => $price,
-            'bedrooms' => $bedrooms,
-            'bathrooms' => $bathrooms,
-            'area' => $area,
-            'floor' => $floor,
-            'parking' => $parking,
-            'description' => $description,
-            'image' => $image,
-        ]);
-    } catch (PDOException $e) {
-        Helper::log('Property::create - ' . $e->getMessage());
-        return false;
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([
+                'title' => $title,
+                'category' => $category,
+                'price' => $price,
+                'bedrooms' => $bedrooms,
+                'bathrooms' => $bathrooms,
+                'area' => $area,
+                'floor' => $floor,
+                'parking' => $parking,
+                'description' => $description,
+                'image' => $image,
+            ]);
+        } catch (PDOException $e) {
+            Helper::log('Property::create - ' . $e->getMessage());
+            return false;
+        }
     }
-}
+
+    public function update(
+        int $id,
+        string $title,
+        string $category,
+        float $price,
+        int $bedrooms,
+        int $bathrooms,
+        int $area,
+        string $floor,
+        string $parking,
+        string $description,
+        string $image
+    ): bool {
+        try {
+            $sql = "UPDATE properties SET
+                        title = :title,
+                        category = :category,
+                        price = :price,
+                        bedrooms = :bedrooms,
+                        bathrooms = :bathrooms,
+                        area = :area,
+                        floor = :floor,
+                        parking = :parking,
+                        description = :description,
+                        image = :image
+                    WHERE id = :id";
+
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([
+                'id' => $id,
+                'title' => $title,
+                'category' => $category,
+                'price' => $price,
+                'bedrooms' => $bedrooms,
+                'bathrooms' => $bathrooms,
+                'area' => $area,
+                'floor' => $floor,
+                'parking' => $parking,
+                'description' => $description,
+                'image' => $image,
+            ]);
+        } catch (PDOException $e) {
+            Helper::log('Property::update - ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function delete(int $id): bool
+    {
+        try {
+            $stmt = $this->db->prepare("DELETE FROM properties WHERE id = :id");
+            return $stmt->execute(['id' => $id]);
+        } catch (PDOException $e) {
+            Helper::log('Property::delete - ' . $e->getMessage());
+            return false;
+        }
+    }
 }
