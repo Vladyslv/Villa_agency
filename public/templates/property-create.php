@@ -15,8 +15,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $parking = trim($_POST['parking'] ?? '0');
     $description = trim($_POST['description'] ?? '');
 
+    $imageName = 'property-01.jpg';
+
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+        $uploadDir = __DIR__ . '/../uploads/';
+
+        $extension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+        $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+
+        if (in_array($extension, $allowed, true)) {
+            $imageName = time() . '-' . basename($_FILES['image']['name']);
+            move_uploaded_file($_FILES['image']['tmp_name'], $uploadDir . $imageName);
+        }
+    }
+
     if ($title !== '' && $category !== '' && $price > 0) {
-        $propertyModel->create($title, $category, $price, $bedrooms, $bathrooms, $area, $floor, $parking, $description);
+        $propertyModel->create($title, $category, $price, $bedrooms, $bathrooms, $area, $floor, $parking, $description, $imageName);
         Redirect::redirect('admin.php');
     }
 }
@@ -27,7 +41,7 @@ require_once 'partials/header-admin.php';
 <div class="admin-card">
     <h2>Create new property</h2>
 
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-8">
                 <div class="form-row">
@@ -93,6 +107,12 @@ require_once 'partials/header-admin.php';
         <div class="form-row">
             <label>Description</label>
             <textarea name="description" rows="6" placeholder="Detailný popis nehnuteľnosti..."></textarea>
+        </div>
+
+        <div class="form-row">
+            <label>Image</label>
+            <input type="file" name="image" accept=".jpg,.jpeg,.png,.webp">
+            <small style="color:#999;">Ak nenahráte obrázok, použije sa default.</small>
         </div>
 
         <div style="display:flex; gap:10px;">
