@@ -1,6 +1,10 @@
 <?php
     require_once '../../app/core/App.php';
     App::init();
+
+    if (!Auth::check()) {
+    Redirect::redirect('login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

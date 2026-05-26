@@ -69,10 +69,18 @@
                     <ul class="nav">
                       <li><a href="index.php">Home</a></li>
                       <li><a href="properties.php">Properties</a></li>
-                      <li><a href="property-details.php">Property Details</a></li>
                       <li><a href="contact.php">Contact Us</a></li>
-                      <li><a href="#"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
-                  </ul>   
+                      <?php if (Auth::check()): ?>
+                        <li><a href="admin.php">Admin</a></li>
+                        <li>
+                          <a href="logout.php" class="btn btn-dark rounded-pill px-4 py-2 d-flex justify-content-center align-items-center">
+                            Logout
+                          </a>
+                        </li>
+                      <?php else: ?>
+                        <li><a href="login.php"><i class="fa fa-user"></i> Login</a></li>
+                      <?php endif; ?>
+                    </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
