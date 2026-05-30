@@ -5,6 +5,8 @@
     if (!Auth::check()) {
     Redirect::redirect('login.php');
 }
+
+$currentUser = Auth::user();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +29,10 @@
         <a href="admin.php"><strong>Villa Admin</strong></a>
         <a href="admin.php">Dashboard</a>
         <a href="index.php">View Site</a>
+        <span style="float:right; color:#aaa; padding-top:8px;">
+            Prihlásený ako <strong style="color:#fff;"><?php echo htmlspecialchars($currentUser->name); ?></strong>
+            | <a href="logout.php" style="color:#f35525;">Logout</a>
+        </span>
     </div>
 </nav>
 
